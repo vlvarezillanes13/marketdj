@@ -1,10 +1,11 @@
 from django.core.exceptions import ImproperlyConfigured
 import json
+from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from unipath import Path
-BASE_DIR = Path(__file__).ancestor(3)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 with open("secret.json") as f:
     secret = json.loads(f.read())
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.child('templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'users.User'
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'es-CL'
 
 TIME_ZONE = 'UTC'
 
